@@ -97,7 +97,7 @@ def main():
         args=training_args,
         train_dataset=dataset,
         processing_class=tokenizer,
-        reward_fn=get_rewards,
+        reward_funcs=get_rewards,
     )
 
     print("Starting GRPO training...")
