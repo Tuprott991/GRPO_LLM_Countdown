@@ -6,6 +6,9 @@ from trl import GRPOTrainer, GRPOConfig
 from reward import CountdownReward
 import re
 
+import os
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
 def main():
     # --- Data Collator to ensure bfloat16 for float tensors ---
     # --- 1. Configuration ---
@@ -22,7 +25,7 @@ def main():
 
     # Quantization configuration for memory efficiency
     bnb_config = BitsAndBytesConfig(
-        load_in_4bit=True,
+        load_in_4bit=False,
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.float16
     )

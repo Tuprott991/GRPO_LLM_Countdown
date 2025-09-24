@@ -5,6 +5,12 @@ datasets==3.0.1
 peft==0.15.1
 scikit-learn==1.6.0
 sentence-transformers==2.2.2
+torch==2.5.1+cu124
+torchaudio==2.5.1+cu124
+torchstain==1.4.1
 torchsummary==1.5.1
+torchvision==0.20.1+cu124
 transformers==4.48.0
 trl==0.17.0
+
+# pip install flash_attn==2.8.0.post2 with torch 2.7.1 cuda 12.6
