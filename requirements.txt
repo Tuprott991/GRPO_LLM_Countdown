@@ -12,3 +12,4 @@ torchsummary==1.5.1
 torchvision==0.20.1+cu124
 transformers==4.48.0
 trl==0.17.0
+flash_attn==2.8.3
