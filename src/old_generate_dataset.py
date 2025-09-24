@@ -2,7 +2,6 @@ import json
 import random
 import operator
 from itertools import combinations, permutations
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class DatasetGenerator:
     """
@@ -67,20 +66,16 @@ class DatasetGenerator:
                     continue
         return None, None
 
-    def generate_dataset(self, num_samples, output_path, max_workers=8):
-        """Generates a dataset with a specified number of samples using parallelization."""
+    def generate_dataset(self, num_samples, output_path):
+        """Generates a dataset with a specified number of samples."""
         dataset = []
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            futures = [executor.submit(self.generate_problem) for _ in range(num_samples * 2)]
-            for future in as_completed(futures):
-                problem = future.result()
-                if problem:
-                    dataset.append(problem)
-                    if len(dataset) % 100 == 0:
-                        print(f"Generated {len(dataset)}/{num_samples} samples...")
-                    if len(dataset) >= num_samples:
-                        break
-        dataset = dataset[:num_samples]
+        while len(dataset) < num_samples:
+            problem = self.generate_problem()
+            if problem:
+                dataset.append(problem)
+                if len(dataset) % 100 == 0:
+                    print(f"Generated {len(dataset)}/{num_samples} samples...")
+        
         with open(output_path, 'w') as f:
             json.dump(dataset, f, indent=4)
         print(f"Successfully generated dataset with {len(dataset)} samples at {output_path}")
