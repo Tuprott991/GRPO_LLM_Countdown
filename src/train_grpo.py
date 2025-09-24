@@ -7,6 +7,7 @@ from reward import CountdownReward
 import re
 
 def main():
+    # --- Data Collator to ensure bfloat16 for float tensors ---
     # --- 1. Configuration ---
     model_id = "microsoft/phi-2"
     
@@ -40,7 +41,7 @@ def main():
         max_prompt_length=128,
         max_completion_length=256,
         remove_unused_columns=False,
-        bf16=True, # Use bfloat16 for performance
+        # bf16=True, # Use bfloat16 for performance
     )
 
     # --- 2. Load Model and Tokenizer ---
@@ -68,13 +69,13 @@ def main():
     dataset = dataset.map(format_prompt)
 
     # Ensure all float tensors are bfloat16
-    def cast_to_bfloat16(batch):
-        for k, v in batch.items():
-            if isinstance(v, torch.Tensor) and v.dtype == torch.float32:
-                batch[k] = v.to(torch.bfloat16)
-        return batch
+    # def cast_to_bfloat16(batch):
+    #     for k, v in batch.items():
+    #         if isinstance(v, torch.Tensor) and v.dtype == torch.float32:
+    #             batch[k] = v.to(torch.bfloat16)
+    #     return batch
 
-    dataset = dataset.with_transform(cast_to_bfloat16)
+    # dataset = dataset.with_transform(cast_to_bfloat16)
 
     # --- 4. Define Reward Function ---
     reward_calculator = CountdownReward()
