@@ -24,7 +24,7 @@ def main():
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype=torch.bfloat16
+        bnb_4bit_compute_dtype=torch.float16
     )
 
     # GRPO training configuration
@@ -41,7 +41,7 @@ def main():
         max_prompt_length=128,
         max_completion_length=256,
         remove_unused_columns=False,
-        # bf16=True, # Use bfloat16 for performance
+        fp16=True, # Use float16 for performance
     )
 
     # --- 2. Load Model and Tokenizer ---
@@ -99,7 +99,7 @@ def main():
                 prompt_info['numbers'], 
                 prompt_info['target']
             )
-            rewards.append(torch.tensor(reward, dtype=torch.bfloat16))
+            rewards.append(torch.tensor(reward, dtype=torch.float16))
         return rewards
 
     # --- 5. Initialize and Run Trainer ---
