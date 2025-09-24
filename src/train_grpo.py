@@ -64,7 +64,17 @@ def main():
         prompt = f"User: Using the numbers {example['numbers']}, create an equation that equals {example['target']}.\nAssistant:"
         return {"prompt": prompt}
 
+
     dataset = dataset.map(format_prompt)
+
+    # Ensure all float tensors are bfloat16
+    def cast_to_bfloat16(batch):
+        for k, v in batch.items():
+            if isinstance(v, torch.Tensor) and v.dtype == torch.float32:
+                batch[k] = v.to(torch.bfloat16)
+        return batch
+
+    dataset = dataset.with_transform(cast_to_bfloat16)
 
     # --- 4. Define Reward Function ---
     reward_calculator = CountdownReward()
