@@ -90,12 +90,12 @@ if __name__ == "__main__":
     
     # Generate training dataset
     generator.generate_dataset(
-        num_samples=500, 
+        num_samples=5000, 
         output_path='../data/train_dataset.json'
     )
     
     # Generate testing dataset
     generator.generate_dataset(
-        num_samples=10, 
+        num_samples=500, 
         output_path='../data/test_dataset.json'
     )
