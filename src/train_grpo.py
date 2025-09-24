@@ -88,7 +88,7 @@ def main():
                 prompt_info['numbers'], 
                 prompt_info['target']
             )
-            rewards.append(torch.tensor(reward, dtype=torch.float32))
+            rewards.append(torch.tensor(reward, dtype=torch.bfloat16))
         return rewards
 
     # --- 5. Initialize and Run Trainer ---
