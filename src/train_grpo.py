@@ -53,7 +53,7 @@ def main():
         quantization_config=bnb_config,
         device_map="auto",
         trust_remote_code=True,
-        attn_implementation="eager" # Use flash_attention_2 for speed if available 
+        attn_implementation="flash_attention_2" # Use flash_attention_2 for speed if available 
     )
     model = get_peft_model(model, lora_config)
     model.config.use_cache = False # Required for gradient checkpointing
