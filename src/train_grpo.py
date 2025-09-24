@@ -80,7 +80,10 @@ def main():
     # --- 4. Define Reward Function ---
     reward_calculator = CountdownReward()
 
-    def get_rewards(completions, prompts_data):
+    def get_rewards(completions, prompts_data=None, prompts=None, **kwargs):
+        # Accept both prompts_data and prompts for compatibility
+        if prompts_data is None and prompts is not None:
+            prompts_data = prompts
         rewards = []
         # TRL passes prompts as a list of dictionaries, we need to parse them back
         parsed_prompts = []
