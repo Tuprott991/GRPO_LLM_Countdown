@@ -41,7 +41,7 @@ def main():
         max_prompt_length=128,
         max_completion_length=256,
         remove_unused_columns=False,
-        fp16=True, # Use float16 for performance
+        # fp16=True, # Use float16 for performance
     )
 
     # --- 2. Load Model and Tokenizer ---

@@ -6,10 +6,9 @@ peft==0.15.1
 scikit-learn==1.6.0
 sentence-transformers==2.2.2
 torch==2.5.1+cu124
-torchaudio==2.5.1+cu124
-torchstain==1.4.1
+torch==2.7.1+cu126
+torchaudio==2.7.1+cu126
+torchvision==0.22.1+cu126
 torchsummary==1.5.1
-torchvision==0.20.1+cu124
 transformers==4.48.0
 trl==0.17.0
-flash_attn==2.8.3
