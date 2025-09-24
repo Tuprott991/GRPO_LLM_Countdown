@@ -30,7 +30,7 @@ def main():
     training_args = GRPOConfig(
         output_dir="../models/grpo_tuned_model",
         per_device_train_batch_size=1, # Each prompt is one "batch" item
-        gradient_accumulation_steps=4,
+        gradient_accumulation_steps=8,
         learning_rate=1e-4,
         num_train_epochs=3,
         num_generations=8, # Group size (G)
